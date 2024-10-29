@@ -1,7 +1,17 @@
-import React from 'react'
+// Navbar.jsx
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function NavBar() {
+
+const Navbar = () => {
   return (
-    <div>NavBar</div>
-  )
-}
+    <nav className="navbar">
+      <div className="navbar-content">
+        <h1 className="logo">RareGems</h1>
+        <Menu items={items} />
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

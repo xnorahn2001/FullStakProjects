@@ -1,1 +1,39 @@
 /* styling for NavBar here */
+.button-container {
+    position: fixed; /* يجعل العنصر ثابتًا */
+    left: 0;         /* يثبته على الجانب الأيسر */
+    top: 0;          /* يبدأ من أعلى الصفحة */
+    height: 100vh;   /* يأخذ ارتفاع كامل الصفحة */
+    width: 80px;     /* عرض مناسب للقائمة الجانبية */
+    background-color: black;
+    display: flex;
+    flex-direction: column; /* يجعل الأزرار فوق بعض */
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 10px 10px 0; /* فقط الأطراف اليمنى تكون دائرية */
+  }
+  
+  .button {
+    outline: 0 !important;
+    border: 0 !important;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+    margin: 10px 0; /* مساحة بين الأزرار */
+  }
+  
+  .button:hover {
+    transform: translateY(-3px);
+  }
+  
+  .icon {
+    font-size: 24px;
+  }
+  
