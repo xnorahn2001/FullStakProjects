@@ -1,15 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ProductList from './ProductList';
-const Homepage = () => {
-  return (
-    
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h1> Welcome to RareGems Store 🏬</h1>
-      <p>Enjoy browsing the latest products and best offers!</p>
-      <ProductList/>
-    </div>
-  );
-};
+import React, { useState,useEffect, useContext } from 'react'
 
-export default Homepage;
+import ProductList from '../components/Products/ProductList';
+import { getAllProducts } from './Services/ProductService';
+import { ProductContext } from './Context/ProductContext';
+
+export const HomePage = () => {
+
+ const {isLoading,error} = useContext(ProductContext);
+  if (isLoading) {
+    return <p>products are loading...</p>
+  }
+
+  if (error) {
+    return <p>{error.message}</p>
+  }
+
+  return (
+    <>
+      <ProductList />
+    </>
+  )
+}
+
+export default HomePage;

@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
-const ProductDetail = () => {
-    const { id } = useParams();
-    const [product, setProduct] = useState(null);
+const ProductDetails = () => {      const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(' http://localhost:5125/api/v1/products');
+      const data = await response.json();
+      console.log("data ", data.product.items)
+      setProducts(data.product.items);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+      fetchProducts();
+  }, []);
+  return (
+    <div>
+<h2>Available products :shopping_trolley:</h2>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            <img src={product.ImageUrl} alt="pro1 " />
+            <h3>{product.name}</h3>
+            <p>Prics: {product.price} SAR</p>
+            <p>{product.categoryName}</p>
+          </li>
+        ))}
+      </ul>
+  </div>
+  )
+}
 
-    useEffect(() => {
-        const fetchProduct = async () => {
-            const response = await fetch(`/api/products/${id}`);
-            const data = await response.json();
-            setProduct(data);
-        };
-        fetchProduct();
-    }, [id]);
-
-    return (
-        <div>
-            {product ? (
-                <>
-                    <img src={product.ImageUrl} alt="Product"/>
-                    <h1>{product.name}</h1>
-                    <p>{product.description}</p>
-                    <p>Price: ${product.price}</p>
-                </>
-            ) : (
-                <p>Loading...</p>
-            )}
-        </div>
-    );
-};
-
-export default ProductDetail;
+export default ProductDetails

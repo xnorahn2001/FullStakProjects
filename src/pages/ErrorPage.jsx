@@ -1,21 +1,22 @@
-// ErrorPage.jsx
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React from "react";
+import { useRouteError, useNavigate } from "react-router-dom";
 
 const ErrorPage = () => {
-    const history = useHistory();
+  const error = useRouteError();
 
-    const handleGoBack = () => {
-        history.goBack();
-    };
+  const navigate = useNavigate();
+  const handlegotohomepage = () => {
+    navigate('/');
+  }
+  return (
+    <div id="error-page">
+      <h1>Oops! page not found</h1>
+      <p>
+        <i>{error.statusText || error.message}</i>
+      </p>
+      <button onClick={handlegotohomepage}>go to home page</button>
+    </div>
+  )
+}
 
-    return (
-        <div className="error-container">
-            <h1>Oops! Something went wrong.</h1>
-            <p>We Couldn't find the page You're looking for.</p>
-            <button onClick={handleGoBack}>Go Back</button>
-        </div>
-    );
-};
-
-export default ErrorPage;
+export default ErrorPage

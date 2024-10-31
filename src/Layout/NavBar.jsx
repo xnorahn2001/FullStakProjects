@@ -1,12 +1,12 @@
 import React from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-export default function NavBar() {
-  return (
 
-    <NavBar expand="lg" bg="light" variant="light">
+const NavBar = () => {
+  return (
+    <Navbar expand="lg" bg="light" variant="light">
       <Container>
-        <Navbar.Brand href='#home'>E-commerce website</Navbar.Brand>
+        <Navbar.Brand href='#home'>RareGems website</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -15,6 +15,8 @@ export default function NavBar() {
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </NavBar>
+    </Navbar>
   )
 }
+
+export default NavBar

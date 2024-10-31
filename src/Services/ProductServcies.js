@@ -8,3 +8,4 @@ export const getAllProducts = async () => {
       throw error;
     }
   };
+ 
