@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { getAllProducts } from '../Services/ProductServcies';
 
-const ProductList = () => {
+const Product = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const products = await getAllProducts();
-        setProducts(products);
+        const response = await fetch('http://localhost:5125/api/v1/products')
+        const data = await response.json();
+        console.log("data",data.product.items);
+        setProducts(data.product.items);
+
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -33,4 +35,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default Product;

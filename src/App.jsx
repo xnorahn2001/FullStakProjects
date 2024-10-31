@@ -1,17 +1,34 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ProductList from './pages/ProductList';
-import Homepage from './pages/Homepage'; 
-import Navbar from './components/navbar/Navbar'; 
+import { createBrowserRouter,RouterProvider,}
+ from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Layout from "./components/Navbar/Layout";
+import Homepage from "./Pages/HomePage";
+import ProductDetail from "./Pages/ProductDetails";
 
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout/>,
+      children: [
+        {
+          path: "/",
+          element: <Homepage />,
+        },
+        {
+          path: "/productdetails",
+          element: <ProductDetail/>,
+        },
+      ]
+    },
+  ]);
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/products" element={<ProductList />} />
-      </Routes>
-    </Router>
+
+    <>
+<RouterProvider router={router} />
+
+    </>
        
   );
 }
