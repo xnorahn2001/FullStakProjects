@@ -1,8 +1,9 @@
-import React, { useState,useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 
 import ProductList from '../components/Products/ProductList';
-import { getAllProducts } from './Services/ProductService';
-import { ProductContext } from './Context/ProductContext';
+import { ProductContext } from '../context/Productcontext';
+
+
 
 export const HomePage = () => {
 
