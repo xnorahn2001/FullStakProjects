@@ -1,17 +1,18 @@
-import React from 'react'
+import React from "react";
+import Footer from "./footer";
+import Header from "./header";
 
-import Footer from './Footer'
-import NavBar from './NavBar'
-import Main from './Main'
-
-const Layout = () => {
+const layout = () => {
   return (
-    <>
-     <NavBar/>
-     <Main/>
-     <Footer/>
-    </>
-  )
-}
+    <div>
+      <header>
+        <Header />
+      </header>
+      <footer>
+        <Footer />
+      </footer>
+    </div>
+  );
+};
 
-export default Layout
+export default layout;

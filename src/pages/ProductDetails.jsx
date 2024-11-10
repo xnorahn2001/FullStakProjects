@@ -1,36 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getProductById } from '../Services/ProductServcies';
-
+import React from "react";
+import { useLocation } from "react-router-dom";
 
 const ProductDetails = () => {
-  const { id } = useParams(); 
-  const [product, setProduct] = useState(null);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const response = await getProductById($id);
-      setProduct(response.data);
-    };
-    fetchProduct();
-  }, [id]);
-
-  if (!product) return <p>Loading...</p>;
-
+  const { state } = useLocation();
+  const { productId, productName,imageUrl, productPrice, description } = state || {};
 
   return (
     <div>
-      <h2>Available products :</h2>
-      <ul>
-          <li key={product.id}>
-          <img src={product.imageUrl} alt={product.name} />
-            <h3>{product.name}</h3>
-            <p>Prics: {product.price} SAR</p>
-            <p>Category:{product.categoryName}</p>
-          </li>
-      </ul>
+      {state ? (
+        <div key={productId}>
+          <h2>{productName}</h2>
+          <img
+            src={imageUrl}
+            alt={productName}
+            style={{ width: "50%", maxWidth: "200px" }}
+          />
+          <p>Product Price: {productPrice}</p>
+          <p>Description: {description}</p>
+          <button onClick={() => window.history.back()}>Back</button>
+        </div>
+      ) : (
+        <div>No Product selected</div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ProductDetails
+export default ProductDetails;

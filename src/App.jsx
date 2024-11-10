@@ -1,13 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+import React from 'react';
 
-import Router from './router/Router';
-import { ProductProvider } from './context/Productcontext';
+import Routes from "./routes/route";
 
-function App() {
-  return <ProductProvider>
-    <Router />
-  </ProductProvider>
-}
+const App = () => {
+  return (
+    
+        <Routes />
+  );
+};
 
-export default App
+export default App;
