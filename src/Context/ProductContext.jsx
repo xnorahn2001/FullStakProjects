@@ -1,57 +1,24 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
-import { getAllProducts } from "../services/ProductService";
+const ProductContext = createContext();
 
-export const ProductContext = createContext();
+export const useProducts = () => useContext(ProductContext);
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-const fetchProducts = async (
-  searchValue = "",
-  pageNumber = 1,
-  limit = 10,
-  sortBy = "name",
-  sortOrder = "asc"
-) => {
-  setIsLoading(true);
-  setProducts([]);
-  try {
-    const data = await getAllProducts(
-      searchValue,
-      pageNumber,
-      limit,
-      sortBy,
-      sortOrder
-    );
-    setProducts(data.data.items);
-  } catch (error) {
-    setError(error);
-    console.error("Error fetching:", error);
-  } finally {
-    setIsLoading(false);
-  }
-};
-
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await axios.get('http://localhost:5125/api/v1/products');
+      setProducts(response.data);
+    };
     fetchProducts();
   }, []);
 
   return (
-    <ProductContext.Provider
-      value={{
-        products,
-        isLoading,
-        error,
-        fetchProducts,
-      }}
-    >
+    <ProductContext.Provider value={{ products }}>
       {children}
     </ProductContext.Provider>
   );
 };
-
-export default ProductProvider;
