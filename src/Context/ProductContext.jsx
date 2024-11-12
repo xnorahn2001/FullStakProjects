@@ -1,24 +1,66 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useEffect, useState } from "react";
+import { getAllProducts } from "../Services/ProductService";
 
-const ProductContext = createContext();
-
-export const useProducts = () => useContext(ProductContext);
+export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageSize] = useState(8);
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc");
+
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const data = await getAllProducts(
+        searchTerm,
+        currentPage,
+        pageSize,
+        sortBy,
+        sortOrder
+      );
+      // console.log(data.data.$values)
+      setProducts(data);
+      setTotalPages(data.data.totalPages);
+     
+    } catch (error) {
+      setError(error);
+    }finally{
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await axios.get('http://localhost:5125/api/v1/products');
-      setProducts(response.data);
-    };
-    fetchProducts();
-  }, []);
+    fetchData();
+  }, [currentPage, sortBy, sortOrder]);
 
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        setProducts,
+        isLoading,
+        error,
+        searchTerm,
+        setSearchTerm,
+        currentPage,
+        setCurrentPage,
+        totalPages,
+        pageSize,
+        sortBy,
+        setSortBy,
+        sortOrder,
+        setSortOrder,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );
 };
+
+export default ProductProvider;

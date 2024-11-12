@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const HomePage = () => {
+import Products from "../Components/Products/Products";
+
+export default function HomePage() {
   return (
-    <div>
-      <h1>مرحبا بكم في متجرنا</h1>
-      <p>أفضل المنتجات تجدونها هنا</p>
-    </div>
+    <>
+      <Products />
+    </>
   );
-};
-
-export default HomePage;
+}
