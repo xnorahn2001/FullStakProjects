@@ -3,7 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ErrorPage from "../Pages/ErrorPage";
 import HomePage from "../pages/HomePage";
-import Products from "../components/products/Products";
+// import Cart from "./components/Cart/CartPage";
+// import Cart from "./components/Cart/Cart";
+
 import AboutPage from "../Pages/AboutPage";
 import ContactPage from "../Pages/ContactPage";
 import Layout from "../Layout/Layout";
@@ -11,9 +13,9 @@ import ProductDetails from "../Pages/ProductDetailsPage";
 import SignupForm from "../components/form/SignupForm";
 import SigninForm from "../components/form/SigninForm";
 import ProfilePage from "../Pages/ProfilePage";
-import AdminDashboard from "../components/dashboard/Admin/AdminDashboard";
 import UserDashboard from "../components/dashboard/User/UserDashboard";
 import UnauthorizedPage from "../Pages/UnauthorizedPage";
+import Products from "../Components/Products/Products";
 
 const Routes = () => {
     const userInfo = JSON.parse(localStorage.getItem("user"));
@@ -29,18 +31,13 @@ const Routes = () => {
         { path: "products/:id", element: <ProductDetails /> },
         { path: "about", element: <AboutPage /> },
         { path: "contact", element: <ContactPage /> },
-        { path: "signup", element: <SignupForm /> },
         { path: "signin", element: <SigninForm /> },
         { path: "profile/:id", element: <ProfilePage /> },
+        { path: "product/:id", element: <ProductDetails /> },
+        // { path: "cart /: id ", element: <CartPage/> },
+
+
         {
-          path: "adminDashboard",
-          element:
-            userRole === "Admin" ? <AdminDashboard /> : <UnauthorizedPage />,
-        },
-        {
-          path: "userDashboard",
-          element:
-            userRole === "Customer" ? <UserDashboard /> : <UnauthorizedPage />,
         },
       ],
     },

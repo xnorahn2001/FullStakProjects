@@ -14,6 +14,8 @@ export const ProductProvider = ({ children }) => {
   const [sortBy, setSortBy] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
 
+  console.log("peoduct provider")
+
   const fetchData = async () => {
     try {
       setIsLoading(true);

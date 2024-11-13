@@ -1,43 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { Container, Typography, Button } from '@mui/material';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Container, Box, Typography, Button, Card, CardContent, CardMedia } from '@mui/material';
 
 const ProductDetails = () => {
-  const { id } = useParams(); // لجلب معرّف المنتج من URL
-  const { state } = useLocation(); // لجلب البيانات من الحالة المرسلة عبر navigation
-  const [product, setProduct] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // إذا كانت البيانات غير موجودة في state، قم بتحميلها باستخدام id من URL
-  useEffect(() => {
-    if (!state) {
-      const fetchProduct = async () => {
-        try {
-          const data = await fetchWrapper(`http://localhost:5125/api/products/${id}`);
-          setProduct(data);
-        } catch (error) {
-          console.error('Failed to load product:', error);
-        }
-      };
-      fetchProduct();
-    } else {
-      setProduct(state);  // في حال كانت البيانات موجودة في state من URL
-    }
-  }, [id, state]);
+  const { name, price } = location.state || {};
 
-  if (!product) return <p>Loading...</p>;
+  const handleAddToCart = () => {
+    navigate('/cart'); 
+  };
 
   return (
-    <Container>
-      <Typography variant="h4">{product.name || product.productName}</Typography>
-      <Typography variant="body1">{product.description}</Typography>
-      <Typography variant="h6">
-        Price: {product.price || `SR${product.productPrice}`}
-      </Typography>
-      {product.image && <img src={product.image} alt={product.name || product.productName} style={{ width: "100%", height: "auto" }} />}
-      <Button variant="contained" color="primary">Add to Cart</Button>
-      <Button variant="outlined" onClick={() => window.history.back()} style={{ marginTop: '10px' }}>
-        Back
-      </Button>
+    <Container maxWidth="lg" sx={{ paddingY: 4 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+        
+        <CardMedia
+          component="img"
+          sx={{ width: 150, height: 150, marginRight: 3 }}
+          image={logoImage}  
+          alt="Product Image"
+        />
+
+        <Card sx={{ maxWidth: 500, width: '100%' }}>
+          <CardContent>
+
+            <Typography variant="h4" sx={{ marginTop: 2 }}>
+              {name || 'Visionary Lenses - Glasses'} 
+            </Typography>
+
+            <Typography variant="h6" sx={{ marginTop: 2 }}>
+              Price: ${price || '77.90'} 
+            </Typography>
+
+            <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleAddToCart}>
+              Add to Cart
+            </Button>
+          </CardContent>
+        </Card>
+      </Box>
     </Container>
   );
 };

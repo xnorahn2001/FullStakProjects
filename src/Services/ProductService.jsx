@@ -2,7 +2,6 @@ import axios from "axios";
 
 
 const URL = "http://localhost:5125/api/v1/products";
-console.log(URL);
 
 export const getAllProducts = async (
   searchTerm,

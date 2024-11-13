@@ -1,23 +1,21 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 
 const Footer = () => {
   return (
-    <Container
-      sx={{
-        position: "absolute", // جعل الفوتر ثابتًا أسفل الصفحة
-        bottom: 0, // وضعه في أسفل الصفحة
-        left: 0,
-        right: 0,
-        backgroundColor: "#3C3D37",
-        padding: 2,
-        zIndex: 1200, // للتأكد من أنه في المقدمة فوق المحتوى
-      }}
-    >
-      <Typography variant="body2" color="#ECDFCC" align="center">
-        © 2024 Norah Naif Aljbreen - Visionary Lenses -. All rights reserved.
-      </Typography>
-    </Container>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#3C3D37", top: "auto", bottom: 0 }}>
+        <Toolbar>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, textAlign: "center", color: "#ECDFCC" }}
+          >
+            © 2024 Norah Naif Aljbreen - Visionary Lenses -. All rights reserved.
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
 
