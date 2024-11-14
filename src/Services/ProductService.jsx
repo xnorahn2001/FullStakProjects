@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const URL = "http://localhost:5125/api/v1/products";
+const URL = "https://sda-3-onsite-backend-teamwork-q22o.onrender.com/api/v1/products";
 
 export const getAllProducts = async (
   searchTerm,
