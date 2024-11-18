@@ -1,17 +1,17 @@
 import React from "react";
 import "./App.css";
 import Routes from "./Routes/Routes";
-import ProductProvider from "./context/ProductContext";
+import ProductContext from './context/ProductContext';
 import UserProvider from "./Context/UserContext";
 
 function App() {
   return (
     <UserProvider>
-      <ProductProvider>
+      <ProductContext>
         <div className="app-container">
           <Routes />
         </div>
-      </ProductProvider>
+      </ProductContext>
     </UserProvider>
   );
 }
